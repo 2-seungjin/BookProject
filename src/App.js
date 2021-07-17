@@ -1,23 +1,27 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useRef, useState, useReducer} from 'react';
 import TodoTemplate from './components/TodoTemplate'
 import TodoInsert from './components/TodoInsert'
 import TodoList from './components/TodoList'
-function App() {
-  const createBulkTodos = () => {
-    const array = [];
-    for(let a = 1; a <= 2500; a++){
-      array.push({
-        id:a,
-        text:`할일 ${a}`,
-        checked: false,
-      });
-    }
-    return array;
+
+/**
+ * 렉 유발 함수
+const createBulkTodos = () => {
+  const array = [];
+  for(let a = 1; a <= 2500; a++){
+    array.push({
+      id:a,
+      text:`할일 ${a}`,
+      checked: false,
+    });
   }
-  const [todos, setTodos] = useState(createBulkTodos);
+  return array;
+}
+ **/
+const App = () => {
+  const [todos, setTodos] = useState([]);
   // 고유값으로 사용될 id
   // ref를 사용하여 변수에 담기
-  const nextId = useRef(2501);
+  const nextId = useRef(1);
 
   const onInsert = useCallback(
     text => {
